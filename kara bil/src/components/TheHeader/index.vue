@@ -28,6 +28,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .the-header {
   background-color: var(--color-dark);
+  border-bottom: 2px solid var(--color-purple);
 
   &__inner {
     display: flex;
@@ -53,6 +54,5 @@ export default defineComponent({
   &__item:not(:last-child) {
     margin-right: 10px;
   }
-
 }
 </style>

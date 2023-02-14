@@ -3,7 +3,17 @@
     <div class="container">
       <div class="the-footer__inner">
         <img src="../../assets/img/cooperation.svg" alt="" class="the-footer__cooperating">
-        <img src="../../assets/img/telegram.svg" alt="" class="the-footer__telegram">
+        
+        <button class="the-footer__button">
+          <img src="../../assets/img/plus.svg" class="the-footer__plus">
+        </button>
+
+        <a
+            href="#"
+            class="the-footer__link">
+          <img src="../../assets/img/telegram.svg" alt="" class="the-footer__telegram">
+        </a>
+
       </div>
     </div>
   </footer>
@@ -19,12 +29,9 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .the-footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
   background-color: var(--color-dark);
   min-height: 67px;
+  border-top: 2px solid var(--color-purple);
 
   &__inner {
     display: flex;
@@ -34,6 +41,17 @@ export default defineComponent({
     height: 100%;
   }
 
+  &__button {
+    background-color: transparent;
+    border: 2px solid var(--color-white);
+    border-radius: 50%;
+    padding: 5px;
+  }
 
+  &__plus {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 </style>
