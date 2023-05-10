@@ -6,8 +6,15 @@
 
         <nav class="the-header__nav">
           <ul class="the-header__list">
-            <li class="the-header__item the-header__item_purple">Главная</li>
-            <li class="the-header__item">Стихи</li>
+
+            
+            <li class="the-header__item the-header__item_purple">
+              <router-link :to="home">Главная</router-link>
+            </li>
+
+            <li class="the-header__item">
+              <router-link :to="poems">Стихи</router-link>
+            </li>
             <li class="the-header__item">Об Авторе</li>
             <li class="the-header__item">Каналы</li>
           </ul>
@@ -17,7 +24,7 @@
   </header>
 </template>
 
-<script lang="js">
+<script lang="ts">
 import { defineComponent } from 'vue';
 
 export default defineComponent({
