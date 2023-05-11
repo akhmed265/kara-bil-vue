@@ -1,15 +1,12 @@
 <template>
   <div class="about">
-
+    <div class="container">
+      ahlkahfjahfha
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-
-export default defineComponent( {
-  name: 'AboutMe'
-})
 </script>
 
 <style lang="scss" scoped>

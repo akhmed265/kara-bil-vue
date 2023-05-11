@@ -3,14 +3,11 @@
     <div class="container">
       <div class="the-footer__inner">
         <img src="../../assets/img/cooperation.svg" alt="" class="the-footer__cooperating">
-        
-        <button class="the-footer__button">
-          <img src="../../assets/img/plus.svg" class="the-footer__plus">
-        </button>
 
         <a
-            href="#"
-            class="the-footer__link">
+          href="#"
+          class="the-footer__link"
+        >
           <img src="../../assets/img/telegram.svg" alt="" class="the-footer__telegram">
         </a>
 
@@ -20,7 +17,7 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import {defineComponent} from "vue";
 
 export default defineComponent({
   name: 'TheFooter'

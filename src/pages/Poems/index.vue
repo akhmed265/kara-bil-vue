@@ -2,8 +2,7 @@
   <div class="poem">
     <div class="container">
       <ul class="poem__list">
-        <li href="" class="poem__item" v-for="poem in 9"
-            :key="poem">
+        <li class="poem__item" v-for="poem in 9" :key="poem">
           <img src="../../assets/img/kara-1.jpg" alt="" class="poem__image">
           <h3 class="poem__name">Здесь</h3>
         </li>
