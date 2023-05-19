@@ -1,10 +1,16 @@
 <template>
   <div class="poem">
     <div class="container">
+
+      <new-post />
+
       <ul class="poem__list">
-        <li class="poem__item" v-for="poem in 9" :key="poem">
+        <li 
+          v-for="post in posts"
+          class="poem__item"
+        >
           <img src="../../assets/img/kara-1.jpg" alt="" class="poem__image">
-          <h3 class="poem__name">Здесь</h3>
+          <h3 class="poem__name">Здесь {post.title}</h3>
         </li>
       </ul>
     </div>
@@ -14,9 +20,26 @@
 <script>
 import {defineComponent} from "vue";
 
+import NewPost from "../../components/NewPost/index.vue";
+
 export default defineComponent({
-  name: 'PoemList'
+  name: 'PoemList',
+
+  components: {
+    NewPost
+  },
+
+  data() {
+    return: {
+      posts: [
+        { 
+          title: Здесь
+        }
+      ]
+    }
+  }
 })
+
 </script>
 
 <style lang="scss" scoped>
