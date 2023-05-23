@@ -1,8 +1,7 @@
 <template>
   <div class="poem">
     <div class="container">
-
-      <new-post />
+      <new-post @create="handleCreatePost" />
 
       <ul class="poem__list">
         <li 
@@ -10,15 +9,15 @@
           class="poem__item"
         >
           <img src="../../assets/img/kara-1.jpg" alt="" class="poem__image">
-          <h3 class="poem__name">Здесь {post.title}</h3>
+          <h3 class="poem__name">{{ post.title }}</h3>
         </li>
       </ul>
     </div>
   </div>
 </template>
 
-<script>
-import {defineComponent} from "vue";
+<script lang="ts">
+import { defineComponent, ref } from "vue";
 
 import NewPost from "../../components/NewPost/index.vue";
 
@@ -29,13 +28,18 @@ export default defineComponent({
     NewPost
   },
 
-  data() {
-    return: {
-      posts: [
-        { 
-          title: Здесь
-        }
-      ]
+  setup() {
+    const posts = ref(JSON.parse(localStorage.getItem('posts')) || [])
+
+    const handleCreatePost = (post: any) => {
+      posts.value.push(post)
+
+      localStorage.setItem('posts', JSON.stringify(posts.value))
+    }
+
+    return {
+      posts,
+      handleCreatePost
     }
   }
 })

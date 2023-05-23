@@ -1,32 +1,20 @@
 <template>
   <div class="new-post">
-    <!-- <button 
-      class="new-post__button"
-      type="button"
-      >
-        New Post
-    </button> -->
-
-    <form 
-      @submit.prevent
-      action=""
-    >
-      <input 
-        v-bind:value="title"
-        @input = "title = $event.target.value"
-        type="text" 
+    <form @submit.prevent>
+      <input
+        v-model="formModel.title"
+        type="text"
         class="new-post__input"
-        placeholder="Название"  
+        placeholder="Название"
       >
-      <input 
-        v-bind:value="body"
-        @input = "body = $event.target.value"
+      <input
+        v-model="formModel.body"
         type="text" 
         class="new-post__input"
         placeholder="Текст"  
       >
 
-      <button class="new-post__button">
+      <button class="new-post__button" @click="handleCreateBtnClick">
         Создать
       </button>
     </form>
@@ -34,29 +22,26 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, reactive } from 'vue';
 
 export default defineComponent({
   name: 'NewPost',
 
-  data() {
-    return {
-    title: '',
-    body: ''
+  emits: ['create'],
+
+  setup(props, context) {
+    const formModel = reactive({
+      title: '',
+      body: ''
+    })
+
+    const handleCreateBtnClick = () => {
+      context.emit('create', formModel)
     }
-  },
 
-  methods: {
-    createPost() {
-      const newPost = {
-        id: Date.now(),
-        title: this.title,
-        body: this.body,
-      }
-
-      this.posts.push(newPost);
-      this.title = '';
-      this.body = '';
+    return {
+      formModel,
+      handleCreateBtnClick
     }
   }
 })
@@ -64,6 +49,8 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .new-post {
+  color: #fff;
+
   &__button {
     background-color: transparent;
     color: var(--color-white);
