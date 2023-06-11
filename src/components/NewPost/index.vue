@@ -1,38 +1,61 @@
 <template>
   <div class="new-post">
-    <form @submit.prevent>
-      <input
-        v-model="formModel.title"
-        type="text"
-        class="new-post__input"
-        placeholder="Название"
-      >
-      <input
-        v-model="formModel.body"
-        type="text" 
-        class="new-post__input"
-        placeholder="Текст"  
-      >
+    <button 
+      class="create-post"
+      @click="showDialog"
+    >
+      Создать пост
+    </button>
+    <my-dialog :show="false">
+      <form @submit.prevent>
+        <input
+          v-model="formModel.title"
+          type="text"
+          class="new-post__input"
+          placeholder="Название"
+        >
+        <input
+          v-model="formModel.body"
+          type="text" 
+          class="new-post__input"
+          placeholder="Текст"  
+        >
 
-      <button class="new-post__button" @click="handleCreateBtnClick">
-        Создать
-      </button>
-    </form>
+        <input
+          v-on="formModel.file"
+          type="file"
+          class="new-post__input"
+        >
+
+        <button class="new-post__button" @click="handleCreateBtnClick">
+          Создать
+        </button>
+      </form>
+    </my-dialog>
+    
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive } from 'vue';
 
+import MyDialog from "../../components/MyDialog/index.vue";
+
+
 export default defineComponent({
   name: 'NewPost',
+
+  components: {
+    MyDialog
+  },
 
   emits: ['create'],
 
   setup(props, context) {
     const formModel = reactive({
       title: '',
-      body: ''
+      body: '',
+      file: ''
     })
 
     const handleCreateBtnClick = () => {
@@ -41,7 +64,14 @@ export default defineComponent({
 
     return {
       formModel,
-      handleCreateBtnClick
+      handleCreateBtnClick,
+      dialogVisible: false
+    }
+  },
+
+  methods: {
+    showDialog() {
+      this.dialogVisible = true;
     }
   }
 })
@@ -53,24 +83,12 @@ export default defineComponent({
 
   &__button {
     background-color: transparent;
-    color: var(--color-white);
+    color: var(--color-purple);
     box-shadow: none;
-    border: 3px solid var(--color-white);
+    border: 3px solid var(--color-purple);
     border-radius: 10px;
     padding: 20px 50px;
-    margin-bottom: 30px;
     margin-top: 20px;
-
-    &:hover {
-      animation: pulsate 1s ease-in-out;
-    }
-  }
-
-  @keyframes pulsate {
-    0%  {
-      box-shadow: 
-        0 0 15px var(--color-white);
-    }
   }
 
   &__input {
@@ -83,6 +101,11 @@ export default defineComponent({
     &:first-child {
       margin-bottom: 10px;
     }
+  }
+
+  .create-post {
+    background-color: #f0f0f3;
+    color: var(--color-dark);
   }
 }
 </style>
