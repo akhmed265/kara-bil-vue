@@ -49,8 +49,7 @@
           <img
             src="../../assets/img/kara-3.jpg"
             alt=""
-            width="300"
-            height="300"
+            class="about__image"
           />
         </div>
       </div>
@@ -67,10 +66,24 @@
     justify-content: space-between;
     padding: 60px;
     color: var(--color-white);
+
+    @media (max-width: 670px) {
+      flex-direction: column-reverse;
+      padding: 40px;
+    }
+
+    @media (max-width: 420px) {
+      padding: 30px 20px;
+    }
   }
 
   &__text {
     max-width: 50%;
+
+    @media (max-width: 670px) {
+      float:left;
+      max-width: 100%;
+    }
   }
 
   &__description {
@@ -86,6 +99,21 @@
 
   &__gallery {
     margin-top: 100px;
+
+    @media (max-width: 670px) {
+      margin: 0;
+    }
+  }
+
+  &__image {
+    width: 300px;
+    height: 300px;
+    transition: all 0.3s ease-in-out;
+
+    @media (max-width: 750px) {
+      width: 200px;
+      height: 200px;
+    }
   }
 }
 </style>

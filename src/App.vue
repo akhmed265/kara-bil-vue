@@ -28,6 +28,11 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .page-content {
-  min-height: calc(100vh - 139px);
+  min-height: calc(100vh - 74px - 74px);
+  padding: 30px 0;
+
+  @media (max-width: 540px) {
+    min-height: calc(100vh - 100px);
+  }
 }
 </style>

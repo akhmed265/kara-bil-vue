@@ -10,8 +10,8 @@
 
         <a href="#" class="the-footer__link">
           <svg
-            width="26"
-            height="24"
+            width="25"
+            height="25"
             viewBox="0 0 26 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -39,7 +39,8 @@ export default defineComponent({
 <style lang="scss" scoped>
 .the-footer {
   background-color: var(--color-dark);
-  min-height: 67px;
+  min-height: 74px;
+  padding: 0 30px;
   border-top: 2px solid var(--color-purple);
 
   &__inner {
@@ -57,10 +58,17 @@ export default defineComponent({
     padding: 5px;
   }
 
-  &__plus {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  &__cooperating {
+    height: 25px;
+
+    @media (max-width: 540px) {
+      max-height: 15px;
+    }
+  }
+
+  svg {
+    height: 20px;
+    width: 20px;
   }
 
   path {
@@ -69,6 +77,10 @@ export default defineComponent({
 
   a:hover path {
     fill: #0088cc;
+  }
+
+  @media (max-width: 540px) {
+    max-height: 50px;
   }
 }
 </style>

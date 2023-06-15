@@ -1,37 +1,60 @@
 <template>
   <div class="poem">
     <div class="container">
-      <new-post @create="handleCreatePost" />
+      <new-post @create="handleCreatePost"/>
 
       <ul class="poem__list">
-        <li 
-          v-for="post in posts"
-          class="poem__item"
+        <li
+            v-for="post in posts"
+            class="poem__item"
+            @click="handlePostClick(post)"
         >
           <img src="../../assets/img/kara-1.jpg" alt="" class="poem__image">
           <h3 class="poem__name">{{ post.title }}</h3>
         </li>
       </ul>
+
+      <my-dialog :show="dialogVisible" @close="dialogVisible = false">
+        <h2>{{ selectedPost.title }}</h2>
+        <div style="overflow-x: auto">
+          <pre>{{ selectedPost.body }}</pre>
+        </div>
+      </my-dialog>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import {defineComponent, reactive, ref} from "vue";
 
 import NewPost from "../../components/NewPost/index.vue";
+import MyDialog from "../../components/MyDialog/index.vue";
 
 export default defineComponent({
   name: 'PoemList',
 
   components: {
-    NewPost
+    NewPost,
+    MyDialog
   },
 
   setup() {
     const posts = ref(JSON.parse(localStorage.getItem('posts')) || [])
 
-    const handleCreatePost = (post: any) => {
+    const dialogVisible = ref(false)
+    const selectedPost = reactive({
+      title: '',
+      body: ''
+    })
+
+    const handlePostClick = (post) => {
+      selectedPost.title = post.title
+      selectedPost.body = post.body
+
+      dialogVisible.value = true
+    }
+
+    const handleCreatePost = (post) => {
       posts.value.push(post)
 
       localStorage.setItem('posts', JSON.stringify(posts.value))
@@ -39,6 +62,9 @@ export default defineComponent({
 
     return {
       posts,
+      dialogVisible,
+      handlePostClick,
+      selectedPost,
       handleCreatePost
     }
   }
@@ -47,19 +73,30 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .poem {
-  margin-top: 30px;
-  margin-bottom: 30px;
-
-  .container {
-    padding-left: 120px;
-    padding-right: 120px;
-  }
-
   &__list {
     display: grid;
     grid-template-columns: repeat(3, max(310px));
     grid-gap: 30px;
     justify-content: center;
+    transition: all 0.3s ease-in-out;
+
+    @media (max-width: 1024px) {
+      grid-template-columns: repeat(3, max(290px));
+    }
+
+    @media (max-width: 992px) {
+      grid-template-columns: repeat(2, max(350px));
+    }
+
+    @media (max-width: 750px) {
+      grid-template-columns: repeat(2, max(250px));
+      grid-gap: 15px 15px;
+    }
+
+    @media (max-width: 540px) {
+      grid-template-columns: max(300px);
+      grid-gap: 30px;
+    }
   }
 
   &__item {
@@ -106,6 +143,8 @@ export default defineComponent({
     z-index: 2;
     color: var(--color-white);
     transition: all 0.3s linear;
+    padding: 0 15px;
+    text-align: center;
   }
 }
 </style>

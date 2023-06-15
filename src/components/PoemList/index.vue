@@ -2,9 +2,12 @@
   <div class="poem">
     <div class="container">
       <ul class="poem__list">
-        <li class="poem__item" v-for="poem in 9" :key="poem">
+        <li
+            v-for="post in posts"
+            class="poem__item"
+        >
           <img src="../../assets/img/kara-1.jpg" alt="" class="poem__image">
-          <h3 class="poem__name">Здесь</h3>
+          <h3 class="poem__name">{{ post.title }}</h3>
         </li>
       </ul>
     </div>
@@ -15,7 +18,8 @@
 import {defineComponent} from "vue";
 
 export default defineComponent({
-  name: 'PoemList'
+  name: 'PoemList',
+
 })
 </script>
 
